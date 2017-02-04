@@ -3,15 +3,47 @@ extends layout
 block content
 	div.container
 		div.row
-			div.col-sm-6.col-md-4.col-md-offset-4
-				h1.text-center.login-title Sign in to our Passport app
-					div.account-wall
-						form(class='form-signin', action='/login', method='POST')
-							input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
-							input(type='password', name='password' class='form-control', placeholder='Password', required)
-							button(class='btn btn-lg btn-primary btn-block', type='submit') Sign in
-							span.clearfix
-					a(href='/signup', class='text-center new-account') Create an account
-					#message
-					if message
-						h1.text-center.error-message #{message}
+			form#loginForm(action='/login', method='POST')
+				div.col-sm-5.col-sm-offset-1
+					select.arv-namelist(size='6', name='username')
+						option John
+						option Paul
+						option Ringo
+						option George
+				div.col-sm-5
+					input#pwdinput.arv-input(type='password', name='password', readonly='')
+					a(href="javascript:addDigit('1')")
+						div.arv-button 1
+					a(href="javascript:addDigit('2')")
+						div.arv-button 2
+					a(href="javascript:addDigit('3')")
+						.arv-button 3
+					a(href="javascript:addDigit('4')")
+						.arv-button 4
+					a(href="javascript:addDigit('5')")
+						.arv-button 5
+					a(href="javascript:addDigit('6')")
+						.arv-button 6
+					a(href="javascript:addDigit('7')")
+						.arv-button 7
+					a(href="javascript:addDigit('8')")
+						.arv-button 8
+					a(href="javascript:addDigit('9')")
+						.arv-button 9
+					a#submitLink(href='#')
+						.arv-button Enter
+					a(href="javascript:addDigit('0')")
+						.arv-button 0
+					a(href='javascript:clear()')
+						.arv-button Clear
+	script.
+		var inputField = document.getElementById('pwdinput');
+		function addDigit(digit) {
+		inputField.value = inputField.value + digit;
+		}
+		function clear() {
+		inputField.value = "";
+		}
+		document.getElementById("submitLink").onclick = function() {
+		document.getElementById("loginForm").submit();
+		}
